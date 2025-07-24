@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatório de Inclusão PCD no Mercado de Trabalho</title>
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ---------- RESET GERAL E VARIÁVEIS ---------- */
+        :root {
+            --azul-forte: #2C2F6F;
+            --azul-neutro: #0097B2;
+            --azul-normal: #00AEED;
+            --cinza-escuro: #333;
+            --raio: 1rem;
+            --sombra: 0 4px 12px rgba(0,0,0,.12);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Cardo', serif;
+            background-color: #FFFFFF;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ---------- ESTILOS DO BLOCO 1: INTRODUÇÃO ---------- */
+        .observatorio-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+        }
+        .logos-section {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .logos-section img {
+            max-height: 7.5rem;
+            flex: 1 1 260px;
+            object-fit: contain;
+            transition: transform .35s cubic-bezier(.4,0,.2,1);
+        }
+        .logos-section img:hover,
+        .logos-section img:focus-visible {
+            transform: scale(1.06);
+            outline: none;
+        }
+        .titulo-observatorio h1 {
+            text-align: center;
+            font-size: clamp(1.8rem,4vw,2.8rem);
+            font-weight: 700;
+            color: var(--azul-forte);
+            margin: 2rem auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,.1);
+        }
+        .descricao-container {
+            display: flex;
+            justify-content: center;
+            margin-block: 2.5rem;
+        }
+        .descricao-texto {
+            position: relative;
+            font-size: clamp(1rem,2.4vw,1.25rem);
+            padding-block: 1.25rem;
+            width: 100%;
+            text-align: center;
+        }
+        .descricao-texto::before,
+        .descricao-texto::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--azul-neutro);
+        }
+        .descricao-texto::before { top: 0; }
+        .descricao-texto::after { bottom: 0; }
+        .cards-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .card {
+            flex: 1 1 300px;
+            min-height: 18rem;
+            display: flex;
+            flex-direction: column;
+            padding: 1.8rem;
+            border-radius: var(--raio);
+            color: #fff;
+            box-shadow: var(--sombra);
+            transition: transform .4s cubic-bezier(.4,0,.2,1),box-shadow .4s;
+        }
+        .card:hover,
+        .card:focus-within {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,.25);
+        }
+        .card h2 {
+            font-size: clamp(1.3rem,3vw,1.7rem);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .card p,
+        .card li { font-size: clamp(.95rem,2.2vw,1.05rem); }
+        .card.missao { background: linear-gradient(135deg,var(--azul-forte),#3A3F85); }
+        .card.visao { background: linear-gradient(135deg,var(--azul-neutro),#00B8D4); }
+        .card.valores { background: linear-gradient(135deg,var(--azul-normal),#00C4FF); }
+        .valores-list { list-style: none; margin-top: .5rem; }
+        .valores-list li { margin: .6rem 0; padding-left: 1.4rem; position: relative; }
+        .valores-list li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #fff;
+        }
+        .card:focus-within { outline: 3px dashed #fff; outline-offset: 4px; }
+        
+        /* ---------- ESTILOS DO BLOCO 2: CONTEÚDO DINÂMICO ---------- */
+        .observatorio-segundo-bloco {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+        .boletins-section {
+            margin-bottom: 30px;
+        }
+        .boletins-title {
+            background: linear-gradient(135deg, #2C2F6F, #3A3F85);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-bottom: 0;
+            font-size: 1.8em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .boletim-item {
+            display: block;
+            padding: 15px 25px;
+            margin: 0;
+            text-decoration: none;
+            color: white;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .boletim-item:nth-of-type(1) {
+            background: linear-gradient(135deg, #00AEED, #00C4FF);
+        }
+        .boletim-item:nth-of-type(2) {
+            background: linear-gradient(135deg, #2C2F6F, #3A3F85);
+        }
+        .boletim-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .audio-player-container {
+            padding: 15px;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+        .audio-player-container audio {
+            max-width: 100%;
+            width: 500px;
+        }
+        .conteudo-principal {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        .card-fullwidth {
+            width: 100%;
+            border-radius: 8px;
+            padding: 30px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .card-fullwidth:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card-fullwidth h3 {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .cards-lado-a-lado {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .card-lado-a-lado {
+            border-radius: 8px;
+            padding: 25px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .card-lado-a-lado:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card-lado-a-lado h3 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .cards-inferiores {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .card-conteudo {
+            border-radius: 8px;
+            padding: 25px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .card-conteudo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card-conteudo h3 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .card-conteudo p {
+            font-size: 0.95em;
+            line-height: 1.5;
+            text-align: left;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+        .card-conteudo ul {
+            list-style-type: '›';
+            padding-left: 25px;
+            text-align: left;
+            font-size: 0.95em;
+        }
+        .card-conteudo ul li {
+            margin-bottom: 8px;
+            padding-left: 10px;
+        }
+        .evento-info {
+            font-size: 0.9em;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .evento-info strong {
+            font-weight: 700;
+        }
+        .btn-livro {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .btn-livro:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+        }
+        .card-contrata { background: linear-gradient(135deg, #00AEED, #00C4FF); }
+        .card-vagas { background: linear-gradient(135deg, #2C2F6F, #3A3F85); }
+        .card-empreendimento { background: linear-gradient(135deg, #2C2F6F, #3A3F85); }
+        .card-eventos { background: linear-gradient(135deg, #0097B2, #00B8D4); }
+        .card-discussao { background: linear-gradient(135deg, #0097B2, #00B8D4); }
+        .card-formacao { background: linear-gradient(135deg, #2C2F6F, #3A3F85); }
+        .card-historia-container {
+            padding: 0;
+            background: none;
+            min-height: 450px;
+        }
+        .relatos-section {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 16px 32px 16px;
+            background: linear-gradient(125deg, #f8f9ff 0%, #ffffff 100%);
+            box-shadow: 0 6px 24px rgba(44, 47, 111, 0.09);
+            border-radius: 18px;
+            border: 2.5px solid #0097B2;
+            color: #333;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .relato-titulo {
+            font-size: 2em;
+            color: #2C2F6F;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-align: left;
+            padding-left: 6px;
+        }
+        .relato-mensagem-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            min-height: 250px;
+            flex-grow: 1;
+        }
+        .relato-mensagem-balao {
+            background: linear-gradient(140deg, #00AEED 50%, #0097B2 100%);
+            color: #fff;
+            padding: 20px 22px 18px 22px;
+            border-radius: 18px 18px 7px 18px;
+            box-shadow: 0 3px 18px rgba(44, 47, 111, 0.09);
+            font-size: 1.07em;
+            line-height: 1.7;
+            position: relative;
+            transition: background 0.5s;
+            margin-bottom: 18px;
+            max-width: 95%;
+            white-space: pre-line;
+        }
+        .relato-mensagem-balao:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 24px;
+            width: 16px;
+            height: 16px;
+            background: #0097B2;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(30deg);
+            z-index: 2;
+        }
+        .relato-nav-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 14px;
+            margin-bottom: 6px;
+        }
+        .relato-btn {
+            background: linear-gradient(90deg, #2C2F6F 70%, #0097B2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 18px;
+            padding: 9px 22px;
+            font-size: 1em;
+            font-family: 'Cardo', serif;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 7px rgba(44,47,111,0.10);
+            transition: background 0.18s, transform 0.12s;
+        }
+        .relato-btn[disabled] {
+            background: #d0d4e0;
+            color: #fff;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .relato-paginacao {
+            text-align: center;
+            color: #888;
+            font-size: 0.98em;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-bottom: -14px;
+        }
+
+        /* ---------- ESTILOS DO BLOCO 3: EQUIPE ---------- */
+        .observatorio-equipe-container{
+            padding:40px 20px;
+            max-width:1200px;
+            margin:0 auto;
+        }
+        .observatorio-equipe-header{
+            background:linear-gradient(135deg,#2C2F6F 0%,#1a1d4a 100%);
+            color:#fff;text-align:center;padding:25px 0;margin-bottom:45px;
+            border-radius:15px;position:relative;overflow:hidden;
+        }
+        .observatorio-equipe-header h2{
+            font-size:2.2em;margin:0;letter-spacing:2px;text-transform:uppercase;
+        }
+        .observatorio-equipe-header:hover::before{left:100%;}
+        .equipe-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+            gap:30px;
+            margin-bottom:60px;
+        }
+        .membro-card{
+            background:linear-gradient(145deg,#f8f9ff 0%,#ffffff 100%);
+            border-radius:20px;padding:30px 25px;box-shadow:0 8px 25px rgba(44,47,111,.12);
+            border:1px solid rgba(0,151,178,.1);position:relative;transition:.4s;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .membro-card::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:4px;
+            background:linear-gradient(45deg,#2C2F6F,#0097B2,#00AEED);
+            border-radius: 20px 20px 0 0;
+        }
+        .membro-card:hover{transform:translateY(-10px);box-shadow:0 18px 40px rgba(44,47,111,.18);}
+        .cargo-etiqueta{
+            background:linear-gradient(45deg,#0097B2,#00AEED);color:#fff;
+            padding:6px 12px;border-radius:20px;font-size:.75em;font-weight:700;
+            letter-spacing:1px;margin-bottom:18px;display:inline-block;
+        }
+        .membro-foto{
+            width:100px;height:100px;border-radius:50%;margin:0 auto 20px;
+            display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(45deg,#00AEED,#0097B2);color:#fff;font-size:2.1em;
+            overflow:hidden;border:3px solid #fff;box-shadow:0 4px 15px rgba(0,151,178,.25);
+        }
+        .membro-foto img{width:100%;height:100%;object-fit:cover;}
+        .membro-nome{font-size:1.35em;font-weight:700;color:#2C2F6F;margin-bottom:12px;}
+        .membro-descricao{font-size:1em;color:#666;line-height:1.6; flex-grow: 1;}
+        .contatos-section{
+            text-align:center;padding:40px 20px;background:linear-gradient(145deg,#f8f9ff 0%,#ffffff 100%);
+            border-radius:20px;box-shadow:0 8px 25px rgba(44,47,111,.1);border:2px solid #00AEED;
+        }
+        .contatos-titulo{font-size:2em;font-weight:700;color:#2C2F6F;margin-bottom:28px;}
+        .contatos-links{
+            display:flex;justify-content:center;flex-wrap:wrap;gap:18px;
+        }
+        .contato-link{
+            text-decoration: none;
+            background:linear-gradient(45deg,#00AEED,#0097B2);color:#fff;padding:14px 26px;
+            border-radius:30px;font-weight:600;min-width:140px;text-align:center;
+            transition:.3s;box-shadow:0 4px 15px rgba(0,151,178,.3);
+        }
+        .contato-link:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(0,151,178,.4);}
+
+        /* ---------- ANIMAÇÕES GERAIS ---------- */
+        @media (prefers-reduced-motion: no-preference) {
+            .card, .card-fullwidth, .card-lado-a-lado, .card-conteudo {
+                animation: fadeInUp 0.6s ease-out both;
+            }
+            .boletim-item {
+                animation: slideInLeft 0.5s ease-out both;
+            }
+            .card:nth-child(2){animation-delay:.1s}
+            .card:nth-child(3){animation-delay:.2s}
+            .card-fullwidth { animation-delay: 0.1s; }
+            .card-lado-a-lado:nth-child(1) { animation-delay: 0.2s; }
+            .card-lado-a-lado:nth-child(2) { animation-delay: 0.3s; }
+            .cards-inferiores .card-conteudo:nth-child(1) { animation-delay: 0.4s; }
+            .cards-inferiores .card-conteudo:nth-child(2) { animation-delay: 0.5s; }
+            .boletim-item:nth-of-type(1) { animation-delay: 0.1s; }
+            .boletim-item:nth-of-type(2) { animation-delay: 0.2s; }
+        }
+        @keyframes fadeInUp{
+            from{opacity:0;transform:translateY(30px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* ---------- RESPONSIVIDADE GERAL ---------- */
+        @media (max-width: 1024px) {
+            .card-fullwidth { padding: 25px; min-height: 280px; }
+            .card-fullwidth h3 { font-size: 1.8em; }
+            .cards-lado-a-lado { gap: 20px; }
+            .card-lado-a-lado { padding: 20px; min-height: 350px; }
+            .cards-inferiores { gap: 20px; }
+            .card-conteudo { padding: 20px; min-height: 220px; }
+            .card-conteudo h3 { font-size: 1.5em; }
+        }
+        @media (max-width: 768px) {
+            .observatorio-equipe-container, .observatorio-segundo-bloco { padding: 20px 15px; }
+            .equipe-grid, .cards-lado-a-lado, .cards-inferiores { grid-template-columns: 1fr; gap: 25px; }
+            .boletins-title { font-size: 1.5em; padding: 12px 0; }
+            .boletim-item { padding: 12px 20px; font-size: 1em; }
+            .card-fullwidth { padding: 20px; min-height: 250px; }
+            .card-fullwidth h3 { font-size: 1.6em; }
+            .card-lado-a-lado { padding: 20px; min-height: 300px; }
+            .card-conteudo { padding: 20px; min-height: auto; }
+            .card-conteudo h3 { font-size: 1.4em; }
+            .card-conteudo p { font-size: 0.9em; }
+            .evento-info { font-size: 0.85em; }
+        }
+        @media (max-width: 650px) {
+            .logos-section { justify-content: center; }
+            .card { flex: 1 1 100%; }
+        }
+        @media (max-width: 600px) {
+            .relatos-section { padding: 13px 4px 26px 4px; }
+            .relato-titulo { font-size: 1.19em;}
+            .relato-mensagem-balao { font-size: 0.99em; padding: 14px 12px; }
+        }
+        @media (max-width: 480px) {
+            .boletins-title { font-size: 1.3em; padding: 10px 0; }
+            .boletim-item { padding: 10px 15px; font-size: 0.95em; }
+            .card-fullwidth { padding: 18px; min-height: 220px; }
+            .card-fullwidth h3 { font-size: 1.4em; }
+            .card-lado-a-lado { padding: 18px; min-height: 280px; }
+            .card-conteudo { padding: 18px; }
+            .card-conteudo h3 { font-size: 1.3em; margin-bottom: 12px; }
+            .card-conteudo p { font-size: 0.85em; }
+            .card-conteudo ul { font-size: 0.9em; padding-left: 20px; }
+            .evento-info { font-size: 0.8em; }
+            .btn-livro { font-size: 0.8em; padding: 6px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BLOCO 1: INTRODUÇÃO -->
+    <section class="observatorio-container">
+        <div class="logos-section">
+            <img src="https://etc.ufma.br/wp-content/uploads/2025/07/observatorio_pcd_logo.png" alt="Logo do Observatório de Inclusão PCD no Mercado de Trabalho" onerror="this.onerror=null;this.src='https://placehold.co/260x120/ffffff/333333?text=Logo+Observatório';">
+            <img src="https://etc.ufma.br/wp-content/uploads/2025/06/ideias-observatorio-1.png" alt="Logo do Grupo de Pesquisa ETC – Comunicação, Tecnologia e Economia" onerror="this.onerror=null;this.src='https://placehold.co/260x120/ffffff/333333?text=Logo+Grupo+ETC';">
+        </div>
+        <header class="titulo-observatorio">
+            <h1>Observatório de Inclusão PCD no Mercado de Trabalho</h1>
+        </header>
+        <div class="descricao-container">
+            <p class="descricao-texto">
+                Observatório criado a fim de realizar pesquisas, promover discussões, compartilhar informações e influenciar políticas públicas a respeito da inserção da pessoa com deficiência no mercado de trabalho.
+            </p>
+        </div>
+        <div class="cards-section">
+            <article class="card missao" tabindex="0">
+                <h2>Missão</h2>
+                <p>Promover a inclusão e a acessibilidade no mercado de trabalho para pessoas com deficiência por meio de pesquisas, formações e disseminação de informações precisas e atuais.</p>
+            </article>
+            <article class="card visao" tabindex="0">
+                <h2>Visão</h2>
+                <p>Ser centro de referência em pesquisa, formação e informação sobre mercado de trabalho inclusivo, reconhecido pela excelência e compromisso social.</p>
+            </article>
+            <article class="card valores" tabindex="0">
+                <h2>Valores</h2>
+                <ul class="valores-list">
+                    <li>Inclusão</li>
+                    <li>Transparência</li>
+                    <li>Serviço à comunidade</li>
+                    <li>Colaboração</li>
+                    <li>Responsabilidade social</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <!-- BLOCO 2: CONTEÚDO DINÂMICO -->
+    <div class="observatorio-segundo-bloco">
+        <div class="boletins-section">
+            <div class="boletins-title">BOLETINS INFORMATIVOS</div>
+            <a href="https://docs.google.com/document/d/1s7FAs6o2m0IAIcgkpeDHNk5Aj-_DHLUb/edit?usp=sharing&ouid=116655875129673173621&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="boletim-item">Boletim 1 - Há (mesmo) vagas?</a>
+            <a href="#" class="boletim-item" id="link-audiodescricao">Áudiodescrição do Boletim 1 - Há (mesmo) vagas?</a>
+            <div id="audio-player-container" class="audio-player-container" style="display: none;">
+                 <audio id="boletim-audio" src="https://etc.ufma.br/wp-content/uploads/2025/07/Audiodescricao-Boletim-julho-2.mp3" controls></audio>
+            </div>
+        </div>
+        
+        <div class="conteudo-principal">
+            <div class="card-fullwidth card-contrata">
+                <h3>Contrata PCD</h3>
+                <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0; overflow: hidden; border-radius: 8px; will-change: transform;">
+                    <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAGo7K6T2oI/iRQcvEseFdeFslsxmr1Bdg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                </div>
+            </div>
+            
+            <div class="cards-lado-a-lado">
+                <div class="card-lado-a-lado card-vagas">
+                    <h3>Vagas</h3>
+                    <div style="position: relative; width: 100%; height: 0; padding-top: 100.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0; overflow: hidden; border-radius: 8px; will-change: transform;">
+                        <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAGs43SW-fk/K87IaCsy7LyDkIdpT47MNA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                    </div>
+                </div>
+                <div class="card-lado-a-lado card-empreendimento">
+                    <h3>Tem PCD empreendendo</h3>
+                    <div style="position: relative; width: 100%; height: 0; padding-top: 100.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0; overflow: hidden; border-radius: 8px; will-change: transform;">
+                        <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.canva.com/design/DAGs5AP5A2Q/Z_aKd1BfQwcWsRQfV7-MGg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cards-inferiores">
+                <div class="card-conteudo card-eventos">
+                    <h3>Eventos</h3>
+                    <p style="font-weight: 700; margin-bottom: 15px; text-align: center;">Lançamento do Observatório de Inclusão PCD no Mercado de Trabalho</p>
+                    <div class="evento-info"><strong>Data:</strong> 24/07/2025</div>
+                    <div class="evento-info"><strong>Horário:</strong> 18h</div>
+                    <div class="evento-info"><strong>Local:</strong> Anfiteatro de Comunicação - Centro de Ciências Sociais, Bloco B, térreo, Universidade Federal do Maranhão.</div>
+                    <p style="margin-top: 15px; font-style: italic;">Além da apresentação do Observatório, será realizada uma roda de conversa sobre o tema central do projeto.</p>
+                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.4); margin: 25px 0;"></div>
+                    <p style="font-weight: 700; margin-bottom: 15px; text-align: center;">Seminário “Do Papel à Prática: o que a Lei Brasileira de Inclusão nos ensina em dez anos?”</p>
+                    <div class="evento-info">🗓 <strong>Data:</strong> 30 de julho | 🕝 <strong>Horário:</strong> 8h às 12h</div>
+                    <div class="evento-info">📍 <strong>Local:</strong> Auditório Central - UFMA</div>
+                    <p style="margin-top: 15px; font-style: italic; text-align:center;">Evento gratuito com certificado de participação!</p>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <a href="https://sigeventos.ufma.br/" target="_blank" class="btn-livro" style="font-size: 0.9em; background: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.5);">INSCRIÇÕES PELO SIGEVENTOS UFMA</a>
+                    </div>
+                    <p style="font-weight: 700; margin-top: 20px;">Participações confirmadas:</p>
+                    <ul style="font-size: 0.9em; list-style-position: inside; padding-left: 0;">
+                        <li><strong>Cosmo Sobral da Silva</strong> (Defensor Público do Núcleo de Defesa do Idoso, da Pessoa com Deficiência e da Saúde)</li>
+                        <li><strong>Airi Carvalho</strong> (Bióloga/UFMA, mulher com deficiência e ativista da luta anticapacitista)</li>
+                        <li><strong>Edgar dos Santos da Ponte Junior</strong> (Comitê Gestor de Políticas da Pessoa com Deficiência- SEDES)</li>
+                        <li><strong>Cleidson Carvalho de Araújo</strong> (Psicólogo Clínico, Especialista em Análise do Comportamento)</li>
+                    </ul>
+                    <p style="font-weight: 700; margin-top: 20px;">Apresentação Artística:</p>
+                    <ul style="font-size: 0.9em; list-style-position: inside; padding-left: 0;">
+                        <li><strong>Flávio Silva Lima</strong> (discente cego do curso de pedagogia da UFMA)</li>
+                        <li><strong>Luana Silva</strong> (arte e dança - DRT 0001021/SE)</li>
+                        <li><strong>Thag Santos</strong> (surda e licenciada em teatro/UFMA)</li>
+                    </ul>
+                </div>
+                
+                <div class="card-conteudo card-historia-container">
+                    <div class="relatos-section">
+                        <div class="relato-titulo">Minha história</div>
+                        <div class="relato-mensagem-container">
+                            <div class="relato-mensagem-balao" id="mensagem-relato"></div>
+                            <div class="relato-nav-buttons">
+                                <button class="relato-btn" id="btn-prev" disabled>&larr; Anterior</button>
+                                <button class="relato-btn" id="btn-next">Próximo &rarr;</button>
+                            </div>
+                            <div class="relato-paginacao" id="relato-paginacao"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-conteudo card-discussao" style="margin-top: 25px;">
+                <h3>Para discutir mais</h3>
+                <p style="font-weight: 600; margin-bottom: 10px;">Livro "A capacidade da pessoa com deficiência no mercado de trabalho: um caminho para a inclusão social e independência profissional" de Paulo Sérgio Generoso.</p>
+                <p>Esse livro reflete sobre as possibilidades das pessoas com deficiência no mercado de trabalho. Vale a pena a leitura não apenas para as pessoas com deficiência, mas para todas as outras para que reflitam sobre suas próprias percepções a respeito da inclusão.</p>
+                <a href="https://www.amazon.com.br/CAPACIDADE-PESSOA-DEFICI%C3%8ANCIA-MERCADO-TRABALHO-ebook/dp/B0DR9HT96L" target="_blank" class="btn-livro">📖 Acessar Livro</a>
+            </div>
+
+            <div class="card-conteudo card-formacao" style="margin-top: 25px;">
+                <h3>Formação Inclusiva</h3>
+                <p>O Observatório, por meio do ETC Hub, oferece formações também com foco em mercado de trabalho e empreendedorismo inclusivo. Abaixo, estão as oficinas e minicursos oferecidos:</p>
+                <ul>
+                    <li>Acessibilidade e comunicação</li>
+                    <li>Acessibilidade para empreendedores</li>
+                    <li>Elaboração de currículo</li>
+                    <li>Soft skills para PCDs</li>
+                    <li>Comunicação inclusiva</li>
+                    <li>Oficina de audiodescrição</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOCO 3: EQUIPE -->
+    <div class="observatorio-equipe-container">
+        <div class="observatorio-equipe-header"><h2>Equipe Executora</h2></div>
+        <div class="equipe-grid">
+            <div class="membro-card">
+                <div class="cargo-etiqueta">COORDENADORA EXECUTIVA</div>
+                <div class="membro-foto"><img src="https://etc.ufma.br/wp-content/uploads/2025/04/aline-5.jpg" alt="Sâmia C. M. Silva" onerror="this.onerror=null;this.src='https://placehold.co/100x100/00aeed/ffffff?text=SC';"></div>
+                <div class="membro-nome">Sâmia Cristina M. Silva</div>
+                <div class="membro-descricao">Doutoranda em Ensino pela RENOEN/UEMA.</div>
+            </div>
+            <div class="membro-card">
+                <div class="cargo-etiqueta">PESQUISADORA</div>
+                <div class="membro-foto"><img src="https://etc.ufma.br/wp-content/uploads/2025/07/membro_observatorio.jpg" alt="Victória L. S. Chaves" onerror="this.onerror=null;this.src='https://placehold.co/100x100/00aeed/ffffff?text=VC';"></div>
+                <div class="membro-nome">Victória L. S. Chaves</div>
+                <div class="membro-descricao">Mestra em Comunicação pela UFMA.</div>
+            </div>
+            <div class="membro-card">
+                <div class="cargo-etiqueta">PESQUISADOR</div>
+                <div class="membro-foto"><img src="https://etc.ufma.br/wp-content/uploads/2025/07/membro_observatorio-2.jpg" alt="Gabriel Bartowski" onerror="this.onerror=null;this.src='https://placehold.co/100x100/00aeed/ffffff?text=GB';"></div>
+                <div class="membro-nome">Gabriel Bartowski</div>
+                <div class="membro-descricao">Mestrando em Comunicação PPGCOMPro - UFMA.</div>
+            </div>
+            <div class="membro-card">
+                <div class="cargo-etiqueta">REDES SOCIAIS E CURADORIA</div>
+                <div class="membro-foto"><img src="https://etc.ufma.br/wp-content/uploads/2025/07/2.jpg" alt="Uelison Natan" onerror="this.onerror=null;this.src='https://placehold.co/100x100/00aeed/ffffff?text=UN';"></div>
+                <div class="membro-nome">Uelison Natan</div>
+                <div class="membro-descricao">Estudante de Letras – UFMA.</div>
+            </div>
+            <div class="membro-card">
+                <div class="cargo-etiqueta">REPORTAGEM E CURADORIA</div>
+                <div class="membro-foto"><img src="https://etc.ufma.br/wp-content/uploads/2025/07/1.jpg" alt="Fabianne Matos" onerror="this.onerror=null;this.src='https://placehold.co/100x100/00aeed/ffffff?text=FM';"></div>
+                <div class="membro-nome">Fabianne Matos</div>
+                <div class="membro-descricao">Graduanda em Jornalismo; produz conteúdos para mídias digitais.</div>
+            </div>
+            <div class="membro-card">
+                <div class="cargo-etiqueta">DESIGNER DE INTERFACE</div>
+                <div class="membro-foto"><img src="https://etc.ufma.br/wp-content/uploads/2025/01/455236961_3938999079759598_8991749061152657791_n.jpg" alt="Bruno Goulart" onerror="this.onerror=null;this.src='https://placehold.co/100x100/00aeed/ffffff?text=BG';"></div>
+                <div class="membro-nome">Bruno Goulart</div>
+                <div class="membro-descricao">Estudante de Jornalismo; pesquisa a interface entre futebol e comunicação.</div>
+            </div>
+            <div class="membro-card">
+                <div class="cargo-etiqueta">ORIENTADOR</div>
+                <div class="membro-foto"><img src="https://etc.ufma.br/wp-content/uploads/2025/02/DSC_7190_PNG-edited-1536x1152.png" alt="Ramon B. Costa" onerror="this.onerror=null;this.src='https://placehold.co/100x100/00aeed/ffffff?text=RC';"></div>
+                <div class="membro-nome">Ramon Bezerra Costa</div>
+                <div class="membro-descricao">Professor e coordenador do Grupo de Pesquisa ETC – UFMA.</div>
+            </div>
+        </div>
+        <div class="contatos-section">
+            <div class="contatos-titulo">Contatos</div>
+            <div class="contatos-links">
+                <a href="https://etcnews.substack.com/"     class="contato-link" target="_blank">Boletim&nbsp;📧</a>
+                <a href="https://wa.link/s5hnsb"            class="contato-link" target="_blank">WhatsApp</a>
+                <a href="https://www.instagram.com/etc.ufma/" class="contato-link" target="_blank">Instagram</a>
+                <a href="https://br.linkedin.com/company/etc-ufma" class="contato-link" target="_blank">LinkedIn</a>
+                <a href="https://x.com/etcufma?lang=pt"       class="contato-link" target="_blank">X</a>
+                <a href="mailto:etc@ufma.br"                  class="contato-link" target="_blank">E-mail</a>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // --- SCRIPT PARA O PLAYER DE ÁUDIO ---
+    const audioLink = document.getElementById('link-audiodescricao');
+    const audioContainer = document.getElementById('audio-player-container');
+    const audioPlayer = document.getElementById('boletim-audio');
+
+    if (audioLink && audioContainer && audioPlayer) {
+        audioLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            if (audioContainer.style.display === 'none') {
+                audioContainer.style.display = 'block';
+                audioPlayer.play().catch(e => console.error("Erro ao tocar áudio:", e));
+            } else {
+                audioContainer.style.display = 'none';
+                audioPlayer.pause();
+                audioPlayer.currentTime = 0;
+            }
+        });
+    }
+
+    // --- Script para o componente "Minha História" ---
+    const relatoPaginas = [
+        `Ser uma Pessoa com Deficiência e estar em busca de uma carreira — e não apenas de um emprego — é um desafio diário. Acredito que seja uma luta invisível e solitária na maioria dos dias. Na verdade, em praticamente todos eles. Tenho 28 anos, me formei em uma universidade federal, fiz pós-graduação e mestrado, mas, ainda assim, para muitas empresas, eu sou apenas uma "cota".
+Não posso negar que, durante minha carreira na comunicação — nesses pouco mais de cinco anos — tive momentos felizes, momentos de reconhecimento. Mas ainda não vivi a tão falada, no mundo corporativo, meritocracia.`,
+        `Infelizmente, descobri a duras penas que a maioria das grandes empresas nos classificam, pessoas com deficiência, como cotistas ou como aqueles que ajudam a evitar o pagamento de uma grande multa.
+Passei por quatro empresas desde que me formei: duas agências de comunicação, uma entidade do terceiro setor e uma holding. Hoje, estou em uma empresa da Vale.`,
+        `Mas, falando sobre essas quatro experiências, as duas agências, no que se refere ao fato de eu ser PcD, foram tranquilas. Eu apenas precisava entregar meu trabalho, e tudo estava certo. Eu gostava, porque sentia que, mesmo com as diversas questões que o ambiente de agência pode ter, eu era vista como qualquer outro profissional que estava ali.
+Na entidade voltada a Direitos Humanos, por incrível que pareça, eu não tinha tantos direitos assim. Cheguei a ouvir frases como: “Você talvez não conseguiu fazer isso por conta da sua deficiência.” Eu era invisibilizada. Não havia medidas ou projetos voltados ou pensados para esse público. Saí de lá porque sempre tive vontade de crescer — e percebi que ali não teria vez.`,
+        `Em seguida, fui para uma grande empresa da minha cidade: mais de 20 anos de história, filiais em outros seis estados — enfim, o lugar perfeito para crescer, se consolidar e, quem sabe, se aposentar dentro daquele grupo. Foi o que pensei. Porém, me deparei com um cargo sem progressão, sem meritocracia, sem qualquer desenho de carreira profissional para um empregado PcD. Nada contra o cargo de assistente ou analista júnior, mas acredito que, considerando minha experiência e currículo, eu merecia mais.
+Não cabem em palavras as coisas que senti, os dias em que chorei e todos os minutos em que me senti exatamente como pessoas preconceituosas e empresas despreparadas enxergam um profissional com deficiência: insuficiente.`,
+        `As chefias, lideranças e RHs podem até vender um discurso de inclusão, mas a realidade é que não são oferecidos planos de carreira, projeção ou qualquer perspectiva real. As empresas oferecem, por obrigatoriedade, empregabilidade — sem ao menos entender quais talentos e expertises o funcionário PcD tem a oferecer.
+Por fim, estou em uma nova jornada e, até o momento, não passei por nenhuma situação de preconceito, capacitismo ou sentimento de inferioridade. Mas, infelizmente, vivo sempre em estado de alerta para qualquer situação que possa vir a acontecer. Acredito que essa seja a cicatriz da dor por ter passado por tantas experiências ruins no mercado de trabalho.`
+    ];
+    let paginaAtual = 0;
+    const elMsg = document.getElementById('mensagem-relato');
+    const elBtnPrev = document.getElementById('btn-prev');
+    const elBtnNext = document.getElementById('btn-next');
+    const elPaginacao = document.getElementById('relato-paginacao');
+
+    function atualizarRelato() {
+        if (elMsg && elPaginacao && elBtnPrev && elBtnNext) {
+            elMsg.innerText = relatoPaginas[paginaAtual];
+            elPaginacao.innerText = `Parte ${paginaAtual + 1} de ${relatoPaginas.length}`;
+            elBtnPrev.disabled = (paginaAtual === 0);
+            elBtnNext.disabled = (paginaAtual === relatoPaginas.length - 1);
+        }
+    }
+
+    if (elBtnPrev && elBtnNext) {
+        elBtnPrev.addEventListener('click', () => {
+            if (paginaAtual > 0) {
+                paginaAtual--;
+                atualizarRelato();
+            }
+        });
+        elBtnNext.addEventListener('click', () => {
+            if (paginaAtual < relatoPaginas.length - 1) {
+                paginaAtual++;
+                atualizarRelato();
+            }
+        });
+    }
+    atualizarRelato();
+});
+</script>
+
+</body>
+</html>
