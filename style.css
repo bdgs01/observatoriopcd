@@ -1,0 +1,60 @@
+/* ======================================= */
+/* ARQUIVO DE ESTILOS GLOBAIS - styles.css */
+/* ======================================= */
+
+/* --- Configurações de base e fontes --- */
+body {
+    font-family: 'Inter', sans-serif; /* Fonte padrão para parágrafos e textos gerais */
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* --- Estilos da Marca (nousma) --- */
+
+/* Classe para aplicar a fonte da marca (Times New Roman) em elementos específicos */
+.font-brand {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Estilização principal para o nome/logo "nousma" */
+.brand-title {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: 700;
+    text-transform: lowercase;
+}
+
+/* Variação do logo para a seção principal, com espaçamento condensado */
+.brand-logo-main {
+    letter-spacing: -4px;
+}
+
+/* --- Estilos do Canvas de Animação --- */
+
+/* Posiciona o canvas para preencher a seção hero, ficando atrás do conteúdo */
+#starfield-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Garante que o canvas fique no fundo */
+}
+
+/* --- Classes de Cores e Utilitários --- */
+/* Essas classes são usadas no HTML para manter a consistência com a paleta de cores */
+
+/* Cor para divisores e bordas sutis no tema escuro */
+.border-gray-divider { 
+    border-color: rgba(255, 255, 255, 0.2); 
+}
+
+/* Cor de fundo para elementos como o rodapé e cards */
+.bg-dark-gray { 
+    background-color: #363836; 
+}
+
+/* Cor de texto secundário, para subtítulos e links */
+.text-light-gray { 
+    color: #bdbdbd; 
+}
